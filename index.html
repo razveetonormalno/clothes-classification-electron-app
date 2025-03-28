@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Классификация одежды</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <style>
+    body {
+      overflow: hidden;
+      background-color: #f5f5f5;
+      font-family: 'Arial', sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .initial-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      gap: 40px;
+      margin-top: 20px;
+      height: 35vh;
+    }
+
+    .left-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .right-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #imagePreview {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      font-size: 35px;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #444;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button {
+      background-color: #0056b3;
+      box-shadow: 0 5px 15px 0 rgba(11, 99, 246, 1);
+      transition: 0.5s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: translate(0,-3px);
+      box-shadow: 0 20px 40px 0 rgba(11, 99, 246, 1);
+    }
+
+    #resultsTitle {
+      margin-top: 30px;
+    }
+
+    #result {
+      background-color: hwb(54 23% 0%); 
+      padding: 15px;
+      border: 2px solid #fbc02d;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      min-width: 150px;
+      text-align: center;
+      font-size: 26px;
+      transition: transform 0.3s ease;
+    }
+
+    #result:hover {
+      transform: scale(1.05); /* немного увеличиваем */
+    }
+
+    canvas {
+      margin-top: 40px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      width: 800px !important;
+      height: 400px !important;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .initial-state.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="initial-state">
+    <h1>Загрузите изображение</h1>
+    <button id="predictBtn">Предсказать</button>
+  </div>
+  <div class="container hidden">
+    <div class="left-column">
+      <h1>Загрузите изображение</h1>
+      <button id="predictBtn2">Предсказать</button>
+      <h2 class="hidden" id="resultsTitle">Предсказанный класс</h2>
+      <div id="result" class="hidden"></div>
+    </div>
+    <div class="right-column">
+      <img id="imagePreview" class="hidden" alt="Предпросмотр изображения">
+    </div>
+  </div>
+  <canvas id="chartCanvas" width="800" height="400" class="hidden"></canvas>
+  <script src="renderer.js"></script>
+  <!-- Подключаем Chart.js через CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>
+
