@@ -4,12 +4,21 @@ from PIL import Image
 from py_app import ClothesUtils, DataTransforms
 from waitress import serve
 import socket
+import os
 
 app = Flask(__name__)
 
 # Загрузка модели при старте сервера
-clth_utils = ClothesUtils('/Users/maksimpishulin/MyApplications/Clothes Classification/py-app/deep-fashion/torch_train')
-model = clth_utils.load_resnet('models/resnet50_Fine-Tuning_best_1.pth', '50')
+clth_utils = ClothesUtils('')
+
+model_name = 'resnet50_Fine-Tuning_best_1.pth'
+print(">>> server.py сейчас в: ", os.getcwd())
+resources_path = os.path.join(os.path.split(os.getcwd())[0], "Resources")
+# model_path = os.path.join(resources_path, model_name)  # На MacOS
+model_path = os.path.join("/".join(os.getcwd().split('/')[:6]), 'models', model_name)  # На MacOS
+# print(">>> server.py находится в:", os.getcwd())
+# print(">>> Ищем модельку в:", model_path)
+model = clth_utils.load_resnet(model_path, '50')
 model.eval()
 
 # Преобразования
@@ -20,6 +29,12 @@ def find_free_port():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind(('', 0))  # 0 - выбрать случайный свободный порт
         return s.getsockname()[1]
+    
+
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"status": "ok"})
+
 
 @app.route('/predict', methods=['POST'])
 def predict():

@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from torchvision import models, datasets, transforms
+from torchvision import models, transforms
 from torch.utils.data import Dataset
 
 import os

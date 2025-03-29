@@ -1,8 +1,26 @@
 {
-  "name": "electron-app",
+  "name": "clothes-classifier",
   "version": "1.0.0",
   "main": "main.js",
+  "build": {
+    "appId": "com.yourname.clothesclassifier",
+    "mac": {
+      "target": "dmg",
+      "category": "public.app-category.utilities"
+    },
+
+    "files": [
+      "models/**", 
+      "index.html",
+      "loading.html",
+      "main.js",
+      "renderer.js",
+      "preload.js",
+      "port.txt"
+    ]
+  },
   "scripts": {
+    "build": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
@@ -11,6 +29,10 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^35.1.1"
+    "electron": "^35.1.1",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "axios": "^1.8.4"
   }
 }

@@ -1,11 +1,16 @@
 import sys
 import requests
 import json
+import os
 
 # Получаем путь к изображению из аргументов командной строки
 image_path = sys.argv[1]
 
-with open('port.txt', 'r') as file:
+# resources_path = os.path.join(os.path.split(os.getcwd())[0], "Resources")
+
+# port_path = os.path.join(resources_path, 'port.txt')
+port_path = 'port.txt'
+with open(port_path, 'r') as file:
     port = file.read().strip()
 
 # Отправляем изображение на сервер
@@ -18,6 +23,11 @@ try:
     response_data = response.json()  # Попытка разобрать JSON
     if response.status_code == 200:
         print(json.dumps(response_data, ensure_ascii=False))
+        
+        # predict_name = 'predict.json'
+        # predict_path = os.path.join(resources_path, predict_name)  # На MacOS
+        # with open(predict_path, 'w', encoding='utf-8') as file:
+        #     json.dump(response_data, file, ensure_ascii=False)
     else:
         print(f"Ошибка: {response.status_code}, {response_data.get('error', 'Неизвестная ошибка')}")
 except ValueError:
