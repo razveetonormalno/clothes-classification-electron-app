@@ -7,7 +7,7 @@ This **Electron** application uses my trained `ResNet50` model to classify **12 
 ## Quick start
 Download the project
 ```bash
-git clone git@github.com:razveetonormalno/clothes-classification-electron-app.git clothes-classification
+git clone https://github.com/razveetonormalno/clothes-classification-electron-app.git clothes-classification
 cd clothes-classification
 ```
 
@@ -17,7 +17,6 @@ pip install -r requirements.txt
 pyinstaller --onefile backend/predict.py
 pyinstaller --onefile backend/server.py
 
-npm init -y
-npm install electron --save-dev
+npm install
 npm start
 ```
