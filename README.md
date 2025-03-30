@@ -1,7 +1,7 @@
 # Clothes Classification
 This **Electron** application uses my trained `ResNet50` model to classify **12 categories** of clothing in the images
 
-![Interface]("ui-screen.png")
+![Interface](ui-screen.png)
 
 
 ## Quick start
