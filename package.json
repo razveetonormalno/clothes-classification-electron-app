@@ -1,34 +1,52 @@
 {
   "name": "clothes-classifier",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "src/main.js",
   "build": {
     "appId": "com.yourname.clothesclassifier",
     "mac": {
       "target": "dmg",
       "category": "public.app-category.utilities"
     },
-
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "createDesktopShortcut": true
+    },
     "files": [
-      "models/**", 
-      "index.html",
-      "loading.html",
-      "main.js",
-      "renderer.js",
-      "preload.js",
-      "port.txt"
+      "src/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/",
+        "to": "dist",
+        "filter": [
+          "predict*",
+          "server*"
+        ]
+      },
+      {
+        "from": "models/",
+        "to": "models",
+        "filter": [
+          "**/*"
+        ]
+      }
     ]
   },
   "scripts": {
+    "start": "cross-env NODE_ENV=development electron src/main.js",
     "build": "electron-builder",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "electron": "^35.1.1",
     "electron-builder": "^26.0.12"
   },
